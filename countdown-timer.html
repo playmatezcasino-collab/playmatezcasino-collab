@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Playmatez Countdown Timer</title>
+    <!-- Google Fonts Raleway -->
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        /* --- CSS Variables for Brand Colors & Styling --- */
+        :root {
+            --color-emerald: #016039;
+            --color-gold: #A37E2B;
+            --color-off-white: #EFEEE7;
+            --color-grey: #2B2C30;
+            --color-black: #000;
+            --border-radius-main: 16px; /* For main sections and cards */
+            --border-radius-small: 14px; /* For smaller elements like countdown tiles */
+        }
+
+        /* --- Global Reset & Base Styles --- */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Raleway', sans-serif;
+            background-color: var(--color-black);
+            color: var(--color-off-white);
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh; /* Ensures body takes full viewport height */
+            overflow-x: hidden; /* Prevents horizontal scroll issues */
+            align-items: center; /* Center content horizontally */
+            justify-content: center; /* Center content vertically */
+            padding: 20px; /* Padding around the main content */
+        }
+
+        /* --- Countdown Container --- */
+        .countdown-container {
+            max-width: 720px; /* Max width as per requirements */
+            width: 100%;
+            padding: 40px 20px;
+            text-align: center;
+            background: radial-gradient(circle at center, rgba(1, 96, 57, 0.15) 0%, transparent 70%);
+            border-radius: var(--border-radius-main);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5); /* Soft shadow for cinematic look */
+            position: relative;
+            z-index: 2;
+        }
+
+        .countdown-container h1 {
+            font-size: 2.5em;
+            font-weight: 900;
+            color: var(--color-off-white);
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .countdown-container .message {
+            font-size: 1.2em;
+            font-weight: 400;
+            color: var(--color-off-white);
+            margin-bottom: 40px;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* --- Countdown Grid Layout --- */
+        .countdown-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr); /* Four equal columns */
+            gap: 15px; /* Space between tiles */
+        }
+
+        .countdown-tile {
+            background-color: var(--color-grey);
+            border-radius: var(--border-radius-small);
+            padding: 20px 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); /* Soft shadow */
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+            border: 2px solid transparent; /* For emerald outline on hover */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .countdown-tile:hover {
+            transform: translateY(-5px); /* Slight lift effect */
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+            border-color: var(--color-emerald); /* Emerald outline */
+        }
+
+        .countdown-tile .number {
+            font-size: 3.5em; /* ~64px on desktop */
+            font-weight: 700;
+            color: var(--color-gold);
+            line-height: 1; /* Tightly packed numbers */
+            margin-bottom: 5px;
+        }
+
+        .countdown-tile .label {
+            font-size: 0.9em;
+            font-weight: 500;
+            color: var(--color-off-white);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* --- Accessibility: Focus Rings --- */
+        /* Ensures visible focus indicators for keyboard navigation */
+        *:focus-visible {
+            outline: 3px solid var(--color-off-white); /* Off-white outline */
+            outline-offset: 3px; /* Space between element and outline */
+            border-radius: 4px; /* Soft rounded corners for focus */
+        }
+
+        /* --- Responsive Adjustments (Media Queries) --- */
+        @media (max-width: 768px) {
+            .countdown-container h1 {
+                font-size: 2em;
+            }
+            .countdown-container .message {
+                font-size: 1em;
+            }
+            .countdown-tile .number {
+                font-size: 2.5em; /* Approx 48px */
+            }
+            .countdown-tile .label {
+                font-size: 0.8em;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .countdown-container {
+                padding: 30px 15px;
+            }
+            .countdown-container h1 {
+                font-size: 1.8em;
+            }
+            .countdown-container .message {
+                font-size: 0.9em;
+                margin-bottom: 30px;
+            }
+            .countdown-grid {
+                gap: 10px;
+            }
+            .countdown-tile {
+                padding: 15px 5px;
+            }
+            .countdown-tile .number {
+                font-size: 1.8em; /* Approx 28-36px */
+            }
+            .countdown-tile .label {
+                font-size: 0.7em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="countdown-container">
+        <h1>Pre-Launch Bonus Countdown</h1>
+        <p id="countdownMessage" class="message">
+            Time remaining until the exclusive offer ends:
+        </p>
+
+        <div class="countdown-grid" role="timer" aria-live="polite" aria-atomic="true">
+            <div class="countdown-tile">
+                <span id="days" class="number">00</span>
+                <span class="label">Days</span>
+            </div>
+            <div class="countdown-tile">
+                <span id="hours" class="number">00</span>
+                <span class="label">Hours</span>
+            </div>
+            <div class="countdown-tile">
+                <span id="minutes" class="number">00</span>
+                <span class="label">Minutes</span>
+            </div>
+            <div class="countdown-tile">
+                <span id="seconds" class="number">00</span>
+                <span class="label">Seconds</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // --- JavaScript Configuration ---
+        // Set the END_TIME to 7 days from the current date for urgency.
+        const now = new Date();
+        const endDate = new Date(now.getTime() + 7 * 24 * 60 * 60 * 1000); // 7 days from now
+        const END_TIME = endDate.getTime();
+
+        // --- DOM Element References ---
+        const daysEl = document.getElementById('days');
+        const hoursEl = document.getElementById('hours');
+        const minutesEl = document.getElementById('minutes');
+        const secondsEl = document.getElementById('seconds');
+        const countdownMessageEl = document.getElementById('countdownMessage');
+
+        let countdownInterval; // Variable to hold the interval ID for clearing
+
+        // --- Utility Function: Format Numbers with Leading Zeros ---
+        /**
+         * Formats a number to always have two digits, adding a leading zero if necessary.
+         * @param {number} num - The number to format.
+         * @returns {string} - The formatted number as a string (e.g., "05", "12").
+         */
+        function formatTime(num) {
+            return num < 10 ? '0' + num : num;
+        }
+
+        // --- Main Countdown Update Function ---
+        /**
+         * Calculates the remaining time until END_TIME and updates the display.
+         * Handles the logic for when the offer ends.
+         */
+        function updateCountdown() {
+            const currentTime = new Date().getTime();
+            const distance = END_TIME - currentTime;
+
+            // Calculate time components (days, hours, minutes, seconds)
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            if (distance < 0) {
+                // --- Offer Has Ended Logic ---
+                clearInterval(countdownInterval); // Stop the timer
+                // Set all displays to "00"
+                daysEl.textContent = '00';
+                hoursEl.textContent = '00';
+                minutesEl.textContent = '00';
+                secondsEl.textContent = '00';
+                // Change the message text
+                countdownMessageEl.textContent = 'Offer ended — join the waitlist to get future bonuses.';
+            } else {
+                // --- Update Live Countdown ---
+                daysEl.textContent = formatTime(days);
+                hoursEl.textContent = formatTime(hours);
+                minutesEl.textContent = formatTime(minutes);
+                secondsEl.textContent = formatTime(seconds);
+            }
+        }
+
+        // --- Event Listeners & Initial Setup ---
+        // Start the countdown timer, updating every second
+        updateCountdown(); // Call once immediately to avoid initial delay
+        countdownInterval = setInterval(updateCountdown, 1000);
+    </script>
+</body>
+</html>

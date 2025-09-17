@@ -1,0 +1,309 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Global reset and overscroll fix */
+html, body {
+  margin: 0;
+  padding: 0;
+  overscroll-behavior-y: none;
+}
+
+/* Custom animations for feature cards */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 5px rgba(163, 126, 43, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(163, 126, 43, 0.6), 0 0 30px rgba(1, 96, 57, 0.3);
+  }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+/* Stagger animation delays for feature cards */
+.group:nth-child(1) .animate-float {
+  animation-delay: 0s;
+}
+
+.group:nth-child(2) .animate-float {
+  animation-delay: 0.2s;
+}
+
+.group:nth-child(3) .animate-float {
+  animation-delay: 0.4s;
+}
+
+.group:nth-child(4) .animate-float {
+  animation-delay: 0.6s;
+}
+
+.group:nth-child(5) .animate-float {
+  animation-delay: 0.8s;
+}
+
+.group:nth-child(6) .animate-float {
+  animation-delay: 1s;
+}
+
+.group:nth-child(7) .animate-float {
+  animation-delay: 1.2s;
+}
+
+.group:nth-child(8) .animate-float {
+  animation-delay: 1.4s;
+}
+
+.group:nth-child(9) .animate-float {
+  animation-delay: 1.6s;
+}
+
+/* Number pop animation for dynamic updates */
+@keyframes number-pop {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.animate-number-pop {
+  animation: number-pop 0.6s ease-out;
+}
+
+/* Slide up fade in animation */
+@keyframes slide-up-fade {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-slide-up-fade {
+  animation: slide-up-fade 0.8s ease-out;
+}
+
+/* Loading screen animations */
+@keyframes loading-pulse {
+  0%, 100% {
+    opacity: 0.8;
+    transform: scale(0.98);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes fade-out {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.animate-loading-pulse {
+  animation: loading-pulse 1.4s ease-in-out infinite;
+}
+
+.animate-fade-in {
+  animation: fade-in 0.3s ease-out;
+}
+
+.animate-fade-out {
+  animation: fade-out 0.3s ease-out;
+}
+
+/* Slow spin animation for loading screen */
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin-slow {
+  animation: spin-slow 3s linear infinite;
+}
+
+/* Flame lift-off animation */
+@keyframes flame-lift-off {
+  0% {
+    transform: translateY(0px) scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: translateY(-30px) scale(1.1);
+    opacity: 0.8;
+  }
+  100% {
+    transform: translateY(-60px) scale(0.9);
+    opacity: 0;
+  }
+}
+
+.animate-flame-lift-off {
+  animation: flame-lift-off 2s ease-out infinite;
+}
+
+/* Screen reader only utility */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Respect reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  .animate-loading-pulse {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+  
+  .animate-fade-in,
+  .animate-fade-out {
+    animation: none;
+  }
+  
+  .animate-section-fade-in,
+  .shimmer-text {
+    animation: none;
+  }
+}
+
+/* Subtle yellow transition shade for section tops */
+:root {
+  --shade-color: rgba(255, 235, 180, 0.18);
+  --shade-height: 12px;
+}
+
+.section-with-top-shade {
+  position: relative;
+}
+
+.section-with-top-shade::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: var(--shade-height);
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    var(--shade-color) 35%,
+    var(--shade-color) 60%,
+    transparent 100%
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Ensure content renders above the shade */
+.section-with-top-shade .container {
+  position: relative;
+  z-index: 2;
+}
+
+/* Responsive shade height adjustments */
+@media (max-width: 640px) {
+  :root {
+    --shade-height: 10px;
+  }
+}
+
+@media (min-width: 1024px) {
+  :root {
+    --shade-height: 14px;
+  }
+}
+
+@media (min-width: 1440px) {
+  :root {
+    --shade-height: 16px;
+  }
+}
+
+body {
+  font-family: 'Raleway', sans-serif;
+  font-display: swap;
+  margin: 0;
+  min-height: 100vh;
+  background-color: #016039;
+  overflow-x: hidden;
+}
+
+/* Mobile-specific background fixes */
+@media (max-width: 768px) {
+  body {
+    background-size: cover;
+  }
+}
+
+/* Glowing footer with gradient background and pulse glow */
+footer.apply-pulse-glow {
+  /* Gradient background from green to gold */
+  background: linear-gradient(to bottom, #016039 0%, #A37E2B 100%);
+  
+  /* Apply the pulse glow animation */
+  animation: pulse-glow 2s ease-in-out infinite;
+  
+  /* Ensure the glow appears correctly relative to the footer */
+  position: relative; 
+  z-index: 1;
+}
+
+/* Keyframes for the pulse glow animation */
+@keyframes pulse-glow {
+  0%, 100% {
+    /* Subtle gold glow */
+    box-shadow: 0 0 5px rgba(163, 126, 43, 0.3);
+  }
+  50% {
+    /* Brighter gold glow with a hint of green */
+    box-shadow: 0 0 20px rgba(163, 126, 43, 0.6);
+  }
+}

@@ -1,0 +1,45 @@
+@@ .. @@
+     "categoryPartnerships": "Partnerships",
+     "categoryAffiliates": "Affiliates",
+     "categoryCompliance": "Compliance",
++    "categoryBundles": "Bundles",
+     "message": "Message",
+@@ .. @@
+     "consentRequired": "You must agree to allow us to reply to your inquiry",
+     "sendMessage": "Send Message",
+     "orEmailUs": "Or email us directly:",
+-    "productType": "Product Type",
+-    "productTypeNote": "This field has been pre-filled based on your selection.",
++    "productName": "Product of Interest",
++    "productNameNote": "This field has been pre-filled based on your selection.",
+     "supportEmail": "support@playmatez.cc",
+@@ .. @@
+       "tiktok": "TikTok"
+     }
+   },
+-  "bundles": {
+-    "exclusiveBundles": "Exclusive Investment Bundles",
+-    "bundlesDescription": "Maximize your $PLYM investment with our exclusive token bundles. Get bonus tokens, better pricing, and priority access to platform features.",
+-    "whyChooseBundles": "Why Choose Token Bundles?",
+-    "bonusTokens": "Bonus Tokens",
+-    "bonusTokensDesc": "Get up to 30% bonus tokens with larger bundles",
+-    "betterValue": "Better Value",
+-    "betterValueDesc": "Pre-launch pricing with significant upside potential",
+-    "priorityAccess": "Priority Access",
+-    "priorityAccessDesc": "Early platform access and exclusive features",
+-    "buyBundle": "Buy Bundle",
+-    "viewAllBundles": "View All Bundles",
+-    "maximizeInvestment": "Want to maximize your $PLYM investment?",
+-    "maximizeDescription": "Get more tokens for your investment with our exclusive bundles. Bonus tokens, better pricing, and priority access included.",
+-    "mostPopular": "Most Popular",
+-    "potentialUpside": "Potential Upside",
+-    "preLaunchPrice": "Pre-Launch Price",
+-    "expectedValue": "Expected Value",
+-    "starterBundle": "Starter Bundle",
+-    "starterDescription": "Perfect for getting started with $PLYM tokens",
+-    "growthBundle": "Growth Bundle", 
+-    "growthDescription": "Most popular choice for serious investors",
+-    "whaleBundle": "Whale Bundle",
+-    "whaleDescription": "Maximum allocation for whale investors"
+-  },
+   "affiliate": {
